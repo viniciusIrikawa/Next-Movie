@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export default function Home({ name }) {
+export default function Home({  list  }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -15,8 +15,17 @@ export default function Home({ name }) {
           Filmes em destaque
         </h1>
 
-        <div> Projeto {name} </div>
-
+        <div> Projeto { list } </div>
+      
+        <ul>
+          {list.map( item => {
+            <li> 
+              <p> Title: {item.title} </p>
+              
+            </li>
+          })}
+        </ul>
+        
       </main>
 
     </div>
@@ -25,14 +34,12 @@ export default function Home({ name }) {
 
 export async function getServerSideProps(){
 
-  async function getDataMovies() {
-    const response = await fetch('')
-    const data = await response.json();
-  }
+  const response = await fetch('http://localhost:3000/api/trending')
+  const data = await response.json();
 
   return {
     props: {
-      name: 'teste'
+      list: data.list
     }
   }
 
