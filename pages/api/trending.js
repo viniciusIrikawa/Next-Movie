@@ -10,4 +10,4 @@ export default async (req, res) => {
         list: data.results  
     });
 
-}
+} 

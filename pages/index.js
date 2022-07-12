@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export default function Home({  list  }) {
+export default function Home({list}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -15,15 +15,13 @@ export default function Home({  list  }) {
           Filmes em destaque
         </h1>
 
-        <div> Projeto { list } </div>
-      
         <ul>
-          {list.map( item => {
-            <li> 
-              <p> Title: {item.title} </p>
-              
+          {list.map( item => (
+            <li className={styles.listMovies}> 
+                <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width='150'/>
+                <span> {item.title} </span> 
             </li>
-          })}
+          ))}
         </ul>
         
       </main>
