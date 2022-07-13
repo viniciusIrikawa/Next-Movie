@@ -6,14 +6,16 @@ import {index} from './index'
 export default function Search() {
 
   const [search, setSearch] = useState('');
+  const [movieResult, setMovieResult] = useState([]);
 
   const searchMovie = async () => {
 
     if(search !== ''){
-      const response = await fetch(`http://localhost:3000/api/movies?query=${search}`)
+      const response = await fetch(`http://localhost:3000/api/movies?q=${search}`)
       const data = await response.json();
 
-      console.log(data)
+      setMovieResult(data.list);
+      showMovie(search);
     }
     
   }
@@ -27,7 +29,9 @@ export default function Search() {
       </Head>
 
       <main className={styles.main}>
+
         <h1> Search a movie </h1>
+
         <div className={styles.wrapperInput}>
           <input placeholder='Type a movie title' 
                 onChange={ e => setSearch(e.target.value)} 
