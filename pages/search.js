@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import styles from '../styles/Search.module.css'
-import {index} from './index'
 
 export default function Search() {
 
@@ -15,7 +14,6 @@ export default function Search() {
       const data = await response.json();
 
       setMovieResult(data.list);
-      showMovie(search);
     }
     
   }
@@ -39,6 +37,17 @@ export default function Search() {
           </input>
           <button onClick={searchMovie}> Search </button>
         </div>
+
+        <ul>
+          {movieResult.map((item, index) => (
+            <li className={styles.listMovies} key={index}> 
+              <a href={`/movie/${item.id}`}>
+                <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width='150'/>
+                <span> {item.title} </span> 
+              </a>
+            </li>
+          ))}
+        </ul>
 
       </main>
     </div>
