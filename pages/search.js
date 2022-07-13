@@ -1,11 +1,22 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useState } from 'react'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Search.module.css'
+import {index} from './index'
 
-export default function Home({list}) {
+export default function Search() {
 
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState('');
+
+  const searchMovie = async () => {
+
+    if(search !== ''){
+      const response = await fetch(`http://localhost:3000/api/movies?query=${search}`)
+      const data = await response.json();
+
+      console.log(data)
+    }
+    
+  }
 
   return (
     <div className={styles.container}>
@@ -16,11 +27,14 @@ export default function Home({list}) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}> Search a movie </h1>
-        <input placeholder='Type a movie title' 
-               onChange={ e => setSearch(e.target.value)} 
-               value={search}> 
-        </input>
+        <h1> Search a movie </h1>
+        <div className={styles.wrapperInput}>
+          <input placeholder='Type a movie title' 
+                onChange={ e => setSearch(e.target.value)} 
+                value={search}> 
+          </input>
+          <button onClick={searchMovie}> Search </button>
+        </div>
 
       </main>
     </div>

@@ -12,15 +12,16 @@ export default function Home({list}) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Filmes em destaque
-        </h1>
 
-        <Link href='/search'> Go to search </Link>
+        <h1> Filmes em destaque</h1>
+
+        <div className={styles.search}>
+          <Link href='/search'> Go to search </Link>
+        </div>
 
         <ul>
-          {list.map( item => (
-            <li className={styles.listMovies}> 
+          {list.map( (item, index) => (
+            <li className={styles.listMovies} key={index}> 
               <a href={`/movie/${item.id}`}>
                 <img src={`https://image.tmdb.org/t/p/original${item.poster_path}`} width='150'/>
                 <span> {item.title} </span> 
@@ -28,9 +29,8 @@ export default function Home({list}) {
             </li>
           ))}
         </ul>
-        
-      </main>
 
+      </main>
     </div>
   )
 }
