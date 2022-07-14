@@ -14,6 +14,15 @@
     flex-direction: row;
 }
 
+.main ul{
+  margin-top: 30px;
+  padding: 0;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
 .listMovies{
   padding: 0;
   width: 12%;
